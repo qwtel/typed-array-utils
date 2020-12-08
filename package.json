@@ -1,7 +1,6 @@
 {
   "name": "typed-array-utils",
   "version": "0.1.0",
-  "description": "",
   "type": "module",
   "main": "cjs/index.js",
   "module": "index.js",
@@ -29,5 +28,15 @@
   "license": "MIT",
   "devDependencies": {
     "typescript": "^4.1.2"
-  }
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qwtel/typed-array-utils.git"
+  },
+  "bugs": {
+    "url": "https://github.com/qwtel/typed-array-utils/issues"
+  },
+  "homepage": "https://github.com/qwtel/typed-array-utils#readme",
+  "description": ""
 }
