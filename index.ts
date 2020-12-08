@@ -5,12 +5,11 @@ export const bufferSourceToUint8Array = (bs: BufferSource) => bs instanceof Arra
   ? new Uint8Array(bs)
   : new Uint8Array(bs.buffer, bs.byteOffset, bs.byteLength);
 
-const bs2u8 = bufferSourceToUint8Array;
-
 export const bufferSourceToDataView = (bs: BufferSource) => bs instanceof ArrayBuffer
   ? new DataView(bs)
   : new DataView(bs.buffer, bs.byteOffset, bs.byteLength);
 
+const bs2u8 = bufferSourceToUint8Array;
 const bs2dv = bufferSourceToDataView;
 
 

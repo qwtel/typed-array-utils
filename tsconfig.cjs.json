@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
     "lib": ["ES2020", "WebWorker"],
-    "target": "ES2015",
-    "module": "CommonJS",
+    "target": "ES5",
     "outDir": "cjs",
+    "module": "CommonJS",
+    "esModuleInterop": true,
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
