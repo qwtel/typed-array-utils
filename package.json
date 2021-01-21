@@ -17,19 +17,19 @@
   },
   "types": "./index.d.ts",
   "scripts": {
-    "clean": "rm -f *.d.ts *.js *.js.map *.d.ts.map",
+    "clean": "shx rm -f *.d.ts *.js *.js.map *.d.ts.map",
     "test": "echo \"Error: no test specified\" && exit 0",
     "build": "npm run build:mjs & npm run build:cjs & wait",
     "build:mjs": "tsc -d -p tsconfig.json",
-    "build:cjs": "tsc -d -p tsconfig.cjs.json && sed -i '' -E 's/\\.js/.cjs/g' cjs/*.js && for f in cjs/*.js; do mv \"$f\" \"${f%.js}.cjs\"; done",
+    "build:cjs": "tsc -d -p tsconfig.cjs.json && shx sed -i 's/\\.js/.cjs/g' cjs/*.js > /dev/null && for f in cjs/*.js; do shx mv \"$f\" \"${f%.js}.cjs\"; done",
     "prepack": "npm run clean && npm run build"
   },
   "author": "Florian Klampfer <mail@qwtel.com> (https://qwtel.com/)",
   "license": "MIT",
   "devDependencies": {
+    "shx": "^0.3.3",
     "typescript": "^4.1.2"
   },
-  "dependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/qwtel/typed-array-utils.git"
