@@ -82,8 +82,13 @@ function compareDataViewsUint32(dv_1: DataView, ...dvs: DataView[]) {
   if (dvs.some(dv_i => dv_1.byteLength !== dv_i.byteLength)) return false;
   let res = true;
   for (const dv_i of dvs) {
-    for (let i = 0; i !== dv_1.byteLength; i += 4) {
+    let i = 0
+    for (i; i < dv_1.byteLength - 3; i += 4) {
       const r = dv_1.getUint32(i) === dv_i.getUint32(i);
+      res = r && res;
+    }
+    for (i; i < dv_1.byteLength; i++) {
+      const r = dv_1.getUint8(i) === dv_i.getUint8(i);
       res = r && res;
     }
   }
@@ -105,11 +110,9 @@ export function unsafeCompareUint8Arrays(u8_1: Uint8Array, ...u8s: Uint8Array[])
 function unsafeCompareDataViewsUint32(dv_1: DataView, ...dvs: DataView[]) {
   if (dvs.some((dv_i) => dv_1.byteLength !== dv_i.byteLength)) return false;
   return dvs.every(dv_i => {
-    for (let i = 0; i !== dv_i.byteLength; i += 4) {
-      if (dv_1.getUint32(i) !== dv_i.getUint32(i)) {
-        return false;
-      }
-    }
+    let i = 0;
+    for (i; i < dv_i.byteLength - 3; i += 4) if (dv_1.getUint32(i) !== dv_i.getUint32(i)) return false;
+    for (i; i < dv_1.byteLength; i++) if (dv_1.getUint8(i) === dv_i.getUint8(i)) return false;
     return true;
   });
 }
