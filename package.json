@@ -1,6 +1,6 @@
 {
   "name": "typed-array-utils",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "type": "module",
   "main": "cjs/index.js",
   "module": "index.js",
