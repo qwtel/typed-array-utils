@@ -19,10 +19,11 @@ const bs2dv = bufferSourceToDataView;
 export const byteToHex = (byte: number) => byte.toString(16).padStart(2, '0');
 export const hexToByte = (hexOctet: string) => parseInt(hexOctet, 16);
 
-export const hexStringToBytes = (hexString: string) => new Uint8Array(hexString.match(/[0-9a-f]{1,2}/ig).map(hexToByte));
-export const bytesToHexString = (bufferSource: BufferSource) => Array.from(bs2u8(bufferSource), byte => byteToHex(byte)).join('');
-
+export const hexStringToBytes = (hexString: string) => new Uint8Array(
+  hexString.replace(/[^0-9a-f]/ig, '').match(/[0-9a-f]{1,2}/ig)?.map(hexToByte) ?? []
+);
 export const bytesToHexArray = (bufferSource: BufferSource) => Array.from(bs2u8(bufferSource), byte => byteToHex(byte));
+export const bytesToHexString = (bufferSource: BufferSource) => bytesToHexArray(bufferSource).join('')
 
 
 // Concatenation
