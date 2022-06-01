@@ -30,6 +30,10 @@ export const bytesToHexString = (bufferSource: BufferSource) => bytesToHexArray(
 // -------------
 
 export function concatUint8Arrays(...uint8Arrays: Uint8Array[]) {
+  return combineUint8Arrays(uint8Arrays)
+}
+
+export function combineUint8Arrays(uint8Arrays: Uint8Array[]) {
   const size = uint8Arrays.reduce((size, u8) => size + u8.length, 0);
   const res = new Uint8Array(size);
   let i = 0;
@@ -44,10 +48,14 @@ export function concatBufferSources(...bufferSources: BufferSource[]) {
   return concatUint8Arrays(...bufferSources.map(bs2u8));
 }
 
+export function combineBufferSources(bufferSources: BufferSource[]) {
+  return combineUint8Arrays(bufferSources.map(bs2u8));
+}
+
 // Splitting
 // ---------
 
-export function splitUint8Array(uint8Array: Uint8Array, ...indices: number[]) {
+export function partitionUint8Array(uint8Array: Uint8Array, indices: number[]) {
   const result: Uint8Array[] = new Array(indices.length + 1);
   let prev = 0;
   let i = 0;
@@ -59,8 +67,16 @@ export function splitUint8Array(uint8Array: Uint8Array, ...indices: number[]) {
   return result;
 }
 
+export function splitUint8Array(uint8Array: Uint8Array, ...indices: number[]) {
+  return partitionUint8Array(uint8Array, indices)
+}
+
+export function partitionBufferSource(bufferSource: BufferSource, indices: number[]) {
+  return partitionUint8Array(bs2u8(bufferSource), indices);
+}
+
 export function splitBufferSource(bufferSource: BufferSource, ...indices: number[]) {
-  return splitUint8Array(bs2u8(bufferSource), ...indices);
+  return partitionUint8Array(bs2u8(bufferSource), indices);
 }
 
 
